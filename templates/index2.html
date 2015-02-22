@@ -4,9 +4,8 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA&libraries=visualization">
     </script>
     <script type="text/javascript">
       // Adding 500 Data Points
@@ -535,7 +534,7 @@ function initialize() {
   });
 
   // placing the heatmap on the map
-  heatmap.setMap(map);
+    heatmap.setMap(map);
 }
 
 // as soon as the document is ready the map is initialized

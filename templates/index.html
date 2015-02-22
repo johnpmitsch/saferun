@@ -4,13 +4,11 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization&key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA"></script>-->
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA&libraries=visualization">
     </script>
     <script type="text/javascript">
-
-      var  map, pointarray, heatmap;
 
       function initialize() {
         var mapOptions = {
@@ -18,7 +16,7 @@
           zoom: 12
         };
 
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
+        var map = new google.maps.Map(document.getElementById('map_canvas'),
             mapOptions);
 
         assaultData = [
@@ -34,11 +32,11 @@
         });
 
         heatmap.setMap(map);
-        }
+      }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-<div id="map-canvas"></div>
+    <div id='map_canvas'></div>
   </body>
 </html>
