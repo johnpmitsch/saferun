@@ -9,6 +9,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA&libraries=visualization">
     </script>
     <script type="text/javascript">
+      var map, pointarray, heatmap;
 
       function initialize() {
         var mapOptions = {
@@ -19,11 +20,15 @@
         var map = new google.maps.Map(document.getElementById('map_canvas'),
             mapOptions);
 
-        assaultData = [
-          {% for coordinate in assaults %}
-             new google.maps.LatLng({ lat: {{ coordinate[0] }}, lng: {{ coordinate[1] }} }),
-          {% endfor %}
-        ];
+        assaultData = []
+
+        var coordinates = {{ assaults|tojson }};
+
+        for(var i = 0; i < coordinates; i++) {
+            var coordinate = new google.maps.LatLng(coordinates[i][0], coordinates[i][1])
+            assaultData.push(coordinate)
+        }
+
 
         var pointArray = new google.maps.MVCArray(assaultData);
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization&key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA"></script>-->
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA&libraries=visualization">
+    </script>
+    <script type="text/javascript">
+
+function initialize() {
+    function initialize() {
+ var mapOptions = {
+    zoom: 13,
+    center: new google.maps.LatLng(35.7806, -78.6389),
+    mapTypeId: google.maps.MapTypeId.SATELLITE
+  };
+
+  // the map and where to place it
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var coordinates = {{ assaults|tojson }};
+
+    lat_lng = new google.maps.LatLng(coordinates[0][0], coordinates[0][1])
+
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map:map
+        title:"Hello World!"
+    });
+    }
+    google.maps.events.addDomListener(window, 'load', initizialize);
+    </script>
+  </head>
+  <body>
+    <div id="map_canvas"></div>
+  </body>
+</html>
