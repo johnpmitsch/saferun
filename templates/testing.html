@@ -1,0 +1,11 @@
+<html>
+    <body>
+    <script type="text/javascript">
+        var testArray = [
+          {% for coordinate in assaults %}
+             {{ coordinate[0] }}, {{ coordinate[1] }},
+          {% endfor %}
+        ]
+    </script>
+    </body>
+</html>
