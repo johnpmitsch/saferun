@@ -1,2 +1,5 @@
 # saferun
-A flask/javascript application showing the safety of streets for running
+A flask/javascript application showing the safety of streets in Raleigh for running
+
+# Live version
+saferun.herokuapp.com
