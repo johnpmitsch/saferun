@@ -4,36 +4,57 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization&key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA"></script>-->
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQ4l5-Ta0ZV8q0m4YWFoanYyzabbQkxA&libraries=visualization">
     </script>
     <script type="text/javascript">
-      var map, pointarray, heatmap;
+      var coordinates = {{ assaults|tojson }};
+      var crash_c = {{ crashes|tojson }};
 
       function initialize() {
+        var myLatlng = new google.maps.LatLng(crash_c[0][0], crash_c[0][1]);
         var mapOptions = {
-          center: { lat: 35.7806, lng: -78.6389},
-          zoom: 12
-        };
-
-        var map = new google.maps.Map(document.getElementById('map_canvas'),
-            mapOptions);
-
-        assaultData = []
-
-        var coordinates = {{ assaults|tojson }};
-
-        for(var i = 0; i < coordinates; i++) {
-            var coordinate = new google.maps.LatLng(coordinates[i][0], coordinates[i][1])
-            assaultData.push(coordinate)
+          zoom: 12,
+          center: myLatlng
         }
 
+        var assaultData = []
+
+        for(var i=0; i < coordinates.length; i++) {
+            assaultData.push(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]))
+        }
+
+        for(var i= 0; i < crash_c.length; i++) {
+            assaultData.push(new google.maps.LatLng(crash_c[i][0], crash_c[i][1]));
+            assaultData.push(new google.maps.LatLng(crash_c[i][0], crash_c[i][1]));
+            assaultData.push(new google.maps.LatLng(crash_c[i][0], crash_c[i][1]));
+        }
+
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
         var pointArray = new google.maps.MVCArray(assaultData);
+        var gradient = [
+                "rgba(255, 231, 77, 0)",
+                "rgba(255, 231, 77, 1)",
+                "rgba(232, 170, 25, 1)",
+                "rgba(255, 150, 40, 1)",
+                "rgba(232, 81, 25, 1)",
+                "rgba(255, 71, 65, 1)"
+        ];
+        var blue = [
+                "rgba(13, 255, 253, 0)",
+                "rgba(13, 255, 253, 1)",
+                "rgba(0, 142, 232, 1)",
+                "rgba(0, 56, 255, 1)",
+                "rgba(52, 12, 232, 1)",
+                "rgba(156, 13, 255, 1)",
+        ]
+
 
         heatmap = new google.maps.visualization.HeatmapLayer({
-          data: pointArray
+          data: pointArray,
+          radius: 15,
+          gradient: blue
         });
 
         heatmap.setMap(map);
@@ -42,6 +63,6 @@
     </script>
   </head>
   <body>
-    <div id='map_canvas'></div>
+<div id="map-canvas"></div>
   </body>
 </html>
